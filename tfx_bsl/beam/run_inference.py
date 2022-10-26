@@ -611,7 +611,10 @@ class _BaseSavedModelHandler(_BaseModelHandler):
     if self._load_override_fn:
       return self._load_override_fn(self._model_path, self._tags)
     self._maybe_register_addon_ops()
-    result = tf.compat.v1.Session(graph=tf.compat.v1.Graph())
+    result = tf.compat.v1.Session(graph=tf.compat.v1.Graph(),
+                                  config=tf.compat.v1.ConfigProto(
+                                    log_device_placement=True
+    ))
     tf.compat.v1.saved_model.loader.load(result, self._tags, self._model_path)
     return result
 
