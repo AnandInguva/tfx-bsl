@@ -615,6 +615,8 @@ class _BaseSavedModelHandler(_BaseModelHandler):
                                   config=tf.compat.v1.ConfigProto(
                                     log_device_placement=True
     ))
+    import logging
+    logging.info(result.list_devices())
     tf.compat.v1.saved_model.loader.load(result, self._tags, self._model_path)
     return result
 
